@@ -12,39 +12,44 @@ function playRound(playerSelection,computerChoice){
     let winner;
     if(playerSelection=="ROCK"){
         if(computerChoice=="Rock")
-            winner="It's a Tie! Rock and Rock"
+            winner="Tie"
         else if(computerChoice=="Paper")
-            winner="You Lose! Paper beats Rock"
+            winner="Lose"
         else
-            winner="You Win! Rock beats "+ computerChoice
+            winner="Win"
     }
     else if(playerSelection=="PAPER"){
         if(computerChoice=="Paper")
-            winner="It's a Tie! Paper and Paper"
+            winner="Tie"
         else if(computerChoice=="Scissors")
-            winner="You Lose! Scissors beats Paper"
+            winner="Lose"
         else
-            winner="You Win! Paper beats "+computerChoice
+            winner="Win"
 
     }
     else{
         if(computerChoice=="Scissors")
-            winner="It's a Tie! Scissors and Scissors"
+            winner="Tie"
         else if(computerChoice=="Rock")
-            winner="You Lose! Rock beats Scissors"
+            winner="Lose"
         else
-            winner="You Win! Scissors beats "+computerChoice
+            winner="Win"
+    }
+    playerSelection=playerSelection.charAt(0)+playerSelection.slice(1).toLowerCase()
+    if(winner=="Tie"){
+        computerPoints++;
+        playerPoints++;
+        return `It's a Tie! ${playerSelection} and ${computerChoice}`
+    }
+    else if(winner=="Win"){
+        playerPoints++;
+        return `You ${winner}! ${playerSelection} beats ${computerChoice}`
+    }
+    else{
+        computerPoints++;
+        return `You ${winner}! ${computerChoice} beats ${playerSelection}`
     }
 
-    if(winner.charAt(5)=='a'){
-        computerPoints++;
-        playerPoints++;
-    }
-    else if(winner.charAt(5)=='o')
-        computerPoints++;
-    else
-        playerPoints++;
-    return winner
 }
 
 function checkInput(playerSelection){
