@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'Action Comics';
+    src: url('fonts/ActionComicsBlack.eot');
+    src: url('fonts/ActionComicsBlack.eot?#iefix') format('embedded-opentype'),
+        url('fonts/ActionComicsBlack.woff2') format('woff2'),
+        url('fonts/ActionComicsBlack.woff') format('woff'),
+        url('fonts/ActionComicsBlack.ttf') format('truetype'),
+        url('fonts/ActionComicsBlack.svg#ActionComicsBlack') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    background-color: rgb(32, 37, 44);
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+
+ul{
+    list-style: none;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    color: yellow;
+    padding: 25px;
+    font-family: 'Action Comics';
+    background-color: rgb(28, 39, 59);
+    margin-bottom: 20px;
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+}
+
+.roundWinner{
+    min-height: 90px;
+    text-align: center;
+    color: white;
+}
+
+.choiceContainer{
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    color: white;
+}
+
+.choice-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.choice{
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    background-color: rgb(9, 21, 36);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+}
+
+.options ul{
+    margin-top: 80px;
+    display: flex;
+    gap: 150px;
+    justify-content: center;
+}
+
+li button{
+    padding: 40px;
+    font-size: 100px;
+    color: white;
+    background-color: rgb(9, 21, 36);
+    border: 2px solid black;
+    border-radius: 20px;
+
+}
+
+.winner{
+    min-height: 90px;
+    text-align: center;
+    color: white;
+}
+
+.replay{
+    text-align: center;
+}
+#playAgain{
+    padding: 10px 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgb(9, 21, 36);
+    border: 2px solid black;
+    border-radius: 20px;
+    
+}
+
+

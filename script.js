@@ -10,6 +10,8 @@ function getComputerChoice(){
 
 function playRound(playerSelection,computerChoice){
     let winner;
+    setChoiceDisplay(playerSelection,computerChoice)
+    playerSelection=playerSelection.toUpperCase();
     if(playerSelection=="ROCK"){
         if(computerChoice=="Rock")
             winner="Tie"
@@ -39,48 +41,107 @@ function playRound(playerSelection,computerChoice){
     if(winner=="Tie"){
         computerPoints++;
         playerPoints++;
-        return `It's a Tie! ${playerSelection} and ${computerChoice}`
+        roundWinnerText.textContent=`It's a Tie! ${playerSelection} and ${computerChoice}`
     }
     else if(winner=="Win"){
         playerPoints++;
-        return `You ${winner}! ${playerSelection} beats ${computerChoice}`
+        roundWinnerText.textContent=`You ${winner}! ${playerSelection} beats ${computerChoice}`
     }
     else{
         computerPoints++;
-        return `You ${winner}! ${computerChoice} beats ${playerSelection}`
+        roundWinnerText.textContent=`You ${winner}! ${computerChoice} beats ${playerSelection}`
     }
 
 }
 
-function checkInput(playerSelection){
+function checkInput(playerSelection,event){
     if(playerSelection!="ROCK" && playerSelection!="PAPER" && playerSelection!="SCISSORS")
         return false
     return true
 }
 
-function game(){
-    let playerSelection
-    playerPoints=computerPoints=0
-    for(let gameCount=1;gameCount<=5;gameCount++){
-        while(true){
-            playerSelection=prompt(`Round ${gameCount}\nRock, Paper or Scissors?`)
-            playerSelection=playerSelection.toUpperCase()
-            if(checkInput(playerSelection))
-                break;
-            else
-                alert("Invalid Choice! perhaps a typo?")
-        }   
-        let computerChoice=getComputerChoice();
-        let winner=playRound(playerSelection,computerChoice)
-        alert(winner)
-    }
-    if(playerPoints>computerPoints)
-        alert(`${playerPoints}-${computerPoints} Player Wins!`)
-    else if(playerPoints==computerPoints)
-        alert(`${playerPoints}-${computerPoints} It's a Tie!`)
-    else
-        alert(`${playerPoints}-${computerPoints} Computer Wins!`)
+function setPoints(){
+    playerPointsText.textContent=`Player Points: ${playerPoints}`;
+    computerPointsText.textContent=`Computer Points: ${computerPoints}`
 }
-let playerPoints,computerPoints;
-game()
+
+function declareWinner(){
+    let winner;
+    gameFinish=1;
+    if(playerPoints==5 && computerPoints==5)
+        winner=`${playerPoints}-${computerPoints} It's a Tie!`;
+    else if(playerPoints==5)
+        winner=`${playerPoints}-${computerPoints} Player Wins!`;
+    else
+        winner=`${playerPoints}-${computerPoints} Computer Wins!`;
+    winnerText.textContent=winner;
+}
+
+function reloadGame(){
+    playerPoints=computerPoints=0;
+    gameFinish=0;
+    setPoints();
+    winnerText.textContent='';
+    roundWinnerText.textContent='';
+    playerChoiceDisplay.textContent="❔";
+    computerChoiceDisplay.textContent="❔";
+}
+
+function setChoiceDisplay(playerChoice,computerChoice){
+    let player=playerChoiceDisplay;
+    let computer=computerChoiceDisplay;
+    switch(playerChoice){
+        case "Rock":
+            player.textContent="✊";
+            break;
+        case "Paper":
+            player.textContent="✋";
+            break;
+        case "Scissors":
+            player.textContent="✌";
+            break;
+    }
+
+    switch(computerChoice){
+        case "Rock":
+            computer.textContent="✊";
+            break;
+        case "Paper":
+            computer.textContent="✋";
+            break;
+        case "Scissors":
+            computer.textContent="✌";
+            break;
+    }
+}
+let playerPoints=0,computerPoints=0;
+let gameFinish=0;
+const playerChoiceDisplay=document.querySelector('.playerChoice');
+const computerChoiceDisplay=document.querySelector('.computerChoice');
+const options=document.querySelector('ul');
+const btnPlayAgain=document.querySelector('#playAgain');
+const playerPointsText=document.querySelector('#playerPoints');
+const computerPointsText=document.querySelector('#computerPoints');
+const winnerText=document.querySelector('#winner');
+const roundWinnerText=document.querySelector('.roundWinner h2');
+
+options.addEventListener('click',
+    (event)=>{
+        const target=event.target;
+        const choice=target.id;
+        if(choice=='' || gameFinish)
+            return;
+        playRound(choice,getComputerChoice());
+        if(computerPoints==5 || playerPoints==5)
+            declareWinner();
+        setPoints();
+    }
+);
+
+btnPlayAgain.addEventListener('click',
+    ()=>{
+        reloadGame();
+    }
+);
+
 
